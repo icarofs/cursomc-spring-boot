@@ -1,20 +1,14 @@
 package com.icarosouza.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.icarosouza.cursomc.domain.enums.EstadoPagamento;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-
-import com.icarosouza.cursomc.domain.enums.EstadoPagamento;
-
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,8 +16,9 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
-    @JoinColumn(name="pedido_id")
+    @JoinColumn(name = "pedido_id")
     @MapsId
     private Pedido pedido;
 
